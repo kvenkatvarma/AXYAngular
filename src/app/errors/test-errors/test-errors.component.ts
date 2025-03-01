@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestErrorsComponent implements OnInit {
   baseUrl ='https://localhost:7086/api/';
-
+  validationErrors:string[];
   constructor(private http:HttpClient) { }
 
   ngOnInit(): void {
@@ -18,6 +18,7 @@ export class TestErrorsComponent implements OnInit {
     this.http.get(this.baseUrl + 'buggy/not-found').subscribe(response=>{
       console.log(response);
     },error=>{
+      this.validationErrors = error;
       console.log(error);
     })
   }
@@ -26,6 +27,7 @@ export class TestErrorsComponent implements OnInit {
     this.http.get(this.baseUrl + 'buggy/bad-request').subscribe(response=>{
       console.log(response);
     },error=>{
+      this.validationErrors = error;
       console.log(error);
     })
   }
@@ -34,7 +36,9 @@ export class TestErrorsComponent implements OnInit {
     this.http.get(this.baseUrl + 'buggy/server-error').subscribe(response=>{
       console.log(response);
     },error=>{
+      this.validationErrors = error;
       console.log(error);
+
     })
   }
 
@@ -42,6 +46,7 @@ export class TestErrorsComponent implements OnInit {
     this.http.get(this.baseUrl + 'buggy/auth').subscribe(response=>{
       console.log(response);
     },error=>{
+      this.validationErrors = error;
       console.log(error);
     })
   }
@@ -52,6 +57,7 @@ export class TestErrorsComponent implements OnInit {
       console.log(response);
     },error=>{
       console.log(error);
+      this.validationErrors = error;
     })
   }
 }
